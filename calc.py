@@ -24,6 +24,12 @@ for mes in range(1, total_de_meses + 1):
         valores_trimestrais.append(valor_inicial)
 
 
+# Function to format y-axis labels
+def thousand_formatter(x, pos):
+    return f'{x/1000:,.0f} K'
+
+thousand_fmt = FuncFormatter(thousand_formatter)
+
 plt.figure(figsize=(10,   6))
 plt.bar(range(1, len(valores_trimestrais) +   1), valores_trimestrais)
 plt.title('Investimento')
@@ -34,5 +40,7 @@ plt.grid(True)
 # Remove padding by setting x-limits to exactly fit the data
 plt.xlim(0, len(valores_trimestrais) + 1)
 
+# Apply the custom formatter to the y-axis
+plt.gca().yaxis.set_major_formatter(thousand_fmt)
 
 plt.show()
